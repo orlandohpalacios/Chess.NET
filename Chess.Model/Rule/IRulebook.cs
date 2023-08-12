@@ -36,5 +36,9 @@ namespace Chess.Model.Rule
         /// <param name="position">The position to be analyzed.</param>
         /// <returns>A sequence of all possible updates for a chess piece on the specified position.</returns>
         IEnumerable<Update> GetUpdates(ChessGame game, Position position);
+        ChessGame CreateGame2();
+        ///<summary>
+        ///so i am basing this on 
+
     }
 }

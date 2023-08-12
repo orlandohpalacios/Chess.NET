@@ -27,12 +27,17 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             <MenuItem Header="Game">
-                <MenuItem Header="New" Command="{Binding NewCommand}" InputGestureText="Ctrl+N">
+                <MenuItem Header="New base game" Command="{Binding NewCommand}" InputGestureText="Ctrl+N">
                     <MenuItem.Icon>
                         <icon:NewIcon />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Undo" Command="{Binding UndoCommand}" InputGestureText="Ctrl+Z">
+                    <MenuItem.Icon>
+                        <icon:UndoIcon />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="newDun" Command="{Binding NewDunsanysCommand}" InputGestureText="Ctrl+Z">
                     <MenuItem.Icon>
                         <icon:UndoIcon />
                     </MenuItem.Icon>

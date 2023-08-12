@@ -129,6 +129,22 @@ namespace Chess.ViewModel.Game
                 );
             }
         }
+        public GenericCommand NewDunsanysCommand
+        {
+            get
+            {
+                return new GenericCommand
+                (
+                    () => true,
+                    () =>
+                    {
+                        this.Game = this.rulebook.CreateGame2();
+                        this.Board = new BoardVM(this.Game.Board);
+                        this.OnPropertyChanged(nameof(this.Status));
+                    }
+                );
+            }
+        }
 
         /// <summary>
         /// Gets the command that reverts the last action of the presented chess game.

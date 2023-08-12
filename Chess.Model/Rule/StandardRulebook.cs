@@ -90,6 +90,53 @@ namespace Chess.Model.Rule
 
             return new ChessGame(board, whitePlayer, blackPlayer);
         }
+        public ChessGame CreateGame2()
+        {
+            IEnumerable<PlacedPiece> makeBaseLine(int row, Color color)
+            {
+                yield return new PlacedPiece(new Position(row, 1), new Knight(color));
+                yield return new PlacedPiece(new Position(row, 2), new Knight(color));
+                yield return new PlacedPiece(new Position(row, 4), new King(color));
+                yield return new PlacedPiece(new Position(row, 5), new Knight(color));
+                yield return new PlacedPiece(new Position(row, 6), new Knight(color));
+            }
+            IEnumerable<PlacedPiece> makeBaseLine2(int row, Color color)
+            {              
+                yield return new PlacedPiece(new Position(row, 4), new King(color));
+            }
+            IEnumerable<PlacedPiece> makePawnsBlack(int row, Color color) {
+                yield return new PlacedPiece(new Position(row, 4), new Pawn(color));
+            }
+            IEnumerable<PlacedPiece> makePawnsWhite(int row, Color color) =>
+                Enumerable.Range(0, 8).Select(
+                    i => new PlacedPiece(new Position(row, i), new Pawn(color))
+            );;
+            IImmutableDictionary<Position, ChessPiece> makePieces(int pawnRow, int baseRow, Color color)
+            {
+               
+                if(color == Color.White)
+                {
+                    var pawnsDun = makePawnsWhite(pawnRow, color);
+                    var baseLineDun = makeBaseLine2(baseRow, color);
+                    var piecesDun = baseLineDun.Union(pawnsDun);
+                    var emptyDun = ImmutableSortedDictionary.Create<Position, ChessPiece>(PositionComparer.DefaultComparer);
+                    return piecesDun.Aggregate(emptyDun, (s, p) => s.Add(p.Position, p.Piece));
+                }
+                var pawns = makePawnsBlack(pawnRow, color);
+                var baseLine = makeBaseLine(baseRow, color);
+                var pieces = baseLine.Union(pawns);
+                var empty = ImmutableSortedDictionary.Create<Position, ChessPiece>(PositionComparer.DefaultComparer);
+                return pieces.Aggregate(empty, (s, p) => s.Add(p.Position, p.Piece));
+            }
+
+            var whitePlayer = new Player(Color.White);
+            var whitePieces = makePieces(1, 0, Color.White);
+            var blackPlayer = new Player(Color.Black);
+            var blackPieces = makePieces(6, 7, Color.Black);
+            var board = new Board(whitePieces.AddRange(blackPieces));
+
+            return new ChessGame(board, whitePlayer, blackPlayer);
+        }
 
         /// <summary>
         /// Gets the status of a chess game, according to the standard rulebook.
