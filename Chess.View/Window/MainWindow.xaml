@@ -39,7 +39,12 @@
                 </MenuItem>
                 <MenuItem Header="newDun" Command="{Binding NewDunsanysCommand}" InputGestureText="Ctrl+Z">
                     <MenuItem.Icon>
-                        <icon:UndoIcon />
+                        <icon:NewIcon />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="newgame960" Command="{Binding New960Command}" InputGestureText="Ctrl+N">
+                    <MenuItem.Icon>
+                        <icon:NewIcon />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />

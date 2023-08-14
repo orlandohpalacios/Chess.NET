@@ -37,6 +37,8 @@ namespace Chess.Model.Rule
         /// <returns>A sequence of all possible updates for a chess piece on the specified position.</returns>
         IEnumerable<Update> GetUpdates(ChessGame game, Position position);
         ChessGame CreateGame2();
+        ChessGame CreateGame3();
+
         ///<summary>
         ///so i am basing this on 
 
